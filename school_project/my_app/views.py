@@ -35,7 +35,6 @@ class studentCreateView(CreateView):
 
     def form_valid(self, form):
         student = form.save(commit=False)
-        print("\n\nschool_id-------->", form.data)
         school_id = form.data['school']
         school = get_object_or_404(School, id=school_id)
         student.school = school
@@ -43,8 +42,6 @@ class studentCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(studentCreateView, self).get_context_data(**kwargs)
-        print("\n\ncontext------------->", context)
-        print("\n\nself.kwargs", self.kwargs)
         context['a_id'] = self.kwargs['pk']
         return context
 
@@ -87,7 +84,6 @@ class studentDeleteView(DeleteView):
 
 def school_delete_all(request):
     schools = School.objects.all()
-    print("\n\n schools", schools)
     for school in schools:
         school.delete()
     return redirect('/schools')
@@ -95,7 +91,6 @@ def school_delete_all(request):
 
 def student_delete_all(request):
     students = Student.objects.all()
-    print("\n\n schools", students)
     for student in students:
         student.delete()
     return redirect('/schools')
