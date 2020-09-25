@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block header_block %}School{% endblock %}
+{% block body_block %}
+<div class="container">
+    <div class="jumbotron">
+        <div class="float-right">
+            <a href="{% url 'my_app:schools'%}" class="btn btn-light">&laquo; Back</a>
+        </div>
+        <h1>School Details!</h1>
+        <div>
+            <p><strong>Name:</strong> {{school_detail.sch_name}}</p>
+            <p><strong>Principal:</strong> {{school_detail.sch_principal}}</p>
+            <p><strong>Location:</strong> {{school_detail.sch_location}}</p>
+        </div>
+    </div>
+    <div>
+        <h1>Students List</h1>
+        <a class="btn btn-primary float-right" href="{% url 'my_app:student_create' pk=school_detail.id %}">Add Student</a><br><br>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for student in school_detail.students.all %}
+                <tr>
+                    <td>{{ student.stu_name }}</td>
+                    <td>{{ student.stu_age }}</td>
+                    <td class="float-right">
+                        <a class="btn btn-warning" href="{% url 'my_app:student_update' pk=student.id %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url 'my_app:student_delete' pk=student.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-danger float-right" href="{% url 'my_app:students_delete' %}">Delete All</a>
+    </div><br><br><br>
+</div>
+{% endblock %}

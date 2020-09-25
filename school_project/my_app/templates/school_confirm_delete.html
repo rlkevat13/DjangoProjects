@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block header_block %}Warning{% endblock %}
+{% block body_block %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Delete School: {{school.sch_name}}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="alert alert-warning" role="alert">
+                Are you sure you want to delete <strong>{{ object }}</strong> ?
+            </div>
+            <input type="submit" class="btn btn-danger" value="Delete">
+<!--            <a href="{% url 'my_app:school_detail' pk=school.id %}">Cancel</a>-->
+            <a class="btn btn-light" href="{% url 'my_app:schools' %}">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block header_block %}Schools{% endblock %}
+{% block body_block %}
+<div class="container">
+    <div class="jumbotron">
+        <div class="float-right">
+            <a href="{% url 'home' %}" class="btn btn-success">&laquo; Home</a>
+        </div>
+        <h1>School List!</h1>
+        <a class="btn btn-primary float-right" href="{% url 'my_app:school_create' %}">Add New School</a><br><br>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Principal</th>
+                    <th>Location</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for school in schools %}
+                <tr>
+                    <td>{{school.sch_name}}</td>
+                    <td>{{school.sch_principal}}</td>
+                    <td>{{school.sch_location}}</td>
+                    <td class="float-right">
+                        <a class="btn btn-info btn-sm" href="{{school.id}}">Detail</a>
+                        <a class="btn btn-warning btn-sm" href="{% url 'my_app:school_update' pk=school.id %}">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="{% url 'my_app:school_delete' pk=school.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a class="btn btn-danger float-right" href="{% url 'my_app:schools_delete' %}">Delete All</a>
+</div>
+{% endblock %}

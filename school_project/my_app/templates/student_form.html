@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block header_block %}Create{% endblock %}
+{% block body_block %}
+<div class="container">
+    <div class="jumbotron">
+<!--        <div class="float-right">-->
+<!--            <a href="{% url 'my_app:schools' %}" class="btn btn-light">&laquo; Back</a>-->
+<!--        </div>-->
+        <h1>
+            Add Student!
+        </h1>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Name:</label>
+                <div class="col-sm-4">{{ form.stu_name }}</div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Age:</label>
+                <div class="col-sm-4">{{ form.stu_age }}</div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">school:</label>
+                <div class="col-sm-4">{{ form.school }}</div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+</div>
+{% endblock %}
